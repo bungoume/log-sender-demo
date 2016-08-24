@@ -54,11 +54,12 @@ $ docker run -d -p 80:80 -v /tmp/log:/log bungoume/httpbin-container
 $ docker run -d --link es:elasticsearch.local -v /tmp/log:/data/log bungoume/log-sender-demo
 ```
 
-5. Visuarize
+5. Start kibana and Visualize
 
 ```
 $ docker run -d --link es:elasticsearch -p 5601:5601 -name kibana kibana
 ```
+Access to localhost:5601
 
 
 ## Memo
