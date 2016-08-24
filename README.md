@@ -52,7 +52,7 @@ $ docker run -d --link es:elasticsearch.local -v /tmp/log:/data/log bungoume/log
 ```
 $ docker run -d --link es:elasticsearch -p 5601:5601 kibana
 ```
-Access to localhost:5601
+Access http://localhost:5601/app/kibana
 
 
 ## Memo
