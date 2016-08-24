@@ -82,6 +82,29 @@ and create.
 
 ### 8. Enjoy Kibana!
 
+
+## Errors?
+Check containers
+```
+$ docker ps
+CONTAINER ID        IMAGE                        COMMAND                  CREATED             STATUS              PORTS                              NAMES
+845e7e19c14b        kibana                       "/docker-entrypoint.s"   About an hour ago   Up About an hour    0.0.0.0:5601->5601/tcp             naughty_noyce
+a145c0cc67a5        bungoume/log-sender-demo     "fluentd"                About an hour ago   Up About an hour                                       berserk_lumiere
+5f39f37311cf        bungoume/httpbin-container   "supervisord -n"         About an hour ago   Up About an hour    0.0.0.0:80->80/tcp                 prickly_fermat
+e0d8b23a4b22        elasticsearch                "/docker-entrypoint.s"   About an hour ago   Up About an hour    0.0.0.0:9200->9200/tcp, 9300/tcp   es
+```
+If not running someone, please check container log.
+
+```
+$ docker ps -a
+CONTAINER ID        IMAGE                        COMMAND                  CREATED             STATUS                       PORTS                              NAMES
+845e7e19c14b        kibana                       "/docker-entrypoint.s"   About an hour ago   Exited (137) 5 seconds ago                                      naughty_noyce
+```
+```
+docker logs --tail=10 845e7e19c14b
+```
+
+
 ## Memo
 
 ### Schema sample
