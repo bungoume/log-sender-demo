@@ -16,6 +16,7 @@ Output
 ```
 $ docker run -d -p 9200:9200 --name es elasticsearch
 ```
+See https://hub.docker.com/_/elasticsearch/
 
 ### 2. Create log schema (simple)
 ```
@@ -41,6 +42,7 @@ $ curl -X PUT localhost:9200/_template/access_app -d '
 ```
 $ docker run -d -p 80:80 -v /tmp/log:/log bungoume/httpbin-container
 ```
+See https://github.com/bungoume/httpbin-container
 
 ### 4. Start log-sender-demo
 ```
