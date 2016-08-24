@@ -18,8 +18,25 @@ $ docker run -d -p 9200:9200 --name es elasticsearch
 ```
 See https://hub.docker.com/_/elasticsearch/
 
-### 2. Create log schema (simple)
+```bash
+# Check Elasticsearch
+$ curl localhost:9200
+{
+  "name" : "Mauvais",
+  "cluster_name" : "elasticsearch",
+  "version" : {
+    "number" : "2.3.5",
+    "build_hash" : "90f439ff60a3c0f497f91663701e64ccd01edbb4",
+    "build_timestamp" : "2016-07-27T10:36:52Z",
+    "build_snapshot" : false,
+    "lucene_version" : "5.5.0"
+  },
+  "tagline" : "You Know, for Search"
+}
 ```
+
+### 2. Create log schema (simple)
+```bash
 $ curl -X PUT localhost:9200/_template/access_app -d '
 {
   "template" : "access_app-*",
@@ -44,6 +61,27 @@ $ docker run -d -p 80:80 -v /tmp/log:/log bungoume/httpbin-container
 ```
 See https://github.com/bungoume/httpbin-container
 
+```bash
+# Check Running
+$ curl localhost/get
+{
+  "args": {},
+  "headers": {
+    "Accept": "*/*",
+    "Content-Length": "",
+    "Content-Type": "",
+    "Host": "localhost",
+    "User-Agent": "curl/7.29.0"
+  },
+  "origin": "172.17.42.1",
+  "url": "http://localhost/get"
+}
+
+# Log created
+$ ls /tmp/log
+nginx_access.log  nginx_error.log  uwsgi_access.log  uwsgi_error.log
+```
+
 ### 4. Start log-sender-demo
 ```
 $ docker run -d --link es:elasticsearch.local -v /tmp/log:/data/log bungoume/log-sender-demo
@@ -56,11 +94,14 @@ $ docker run -d --link es:elasticsearch -p 5601:5601 kibana
 ```
 Access http://localhost:5601/app/kibana
 
+### 6. Configure Kibana
+set "Index name or pattern": `access_app-*`, "Time-field name": `@timestamp`
+and create.
 
 ## Memo
 
 ### Schema sample
-```
+```bash
 PUT _template/access_app
 {
   "template" : "access_app-*",
@@ -136,5 +177,5 @@ PUT _template/access_app
 ## Build (for developer or offline user)
 
 ```
-sudo docker build -t bungoume/log-sender-demo .
+$ sudo docker build -t bungoume/log-sender-demo .
 ```
