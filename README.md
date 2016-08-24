@@ -10,13 +10,6 @@ Output
 * Elasticsearch
 
 
-## Build
-
-```
-sudo docker build -t bungoume/log-sender-demo .
-```
-
-
 ## Usage
 
 1. Run Elasticsearch
@@ -57,7 +50,7 @@ $ docker run -d --link es:elasticsearch.local -v /tmp/log:/data/log bungoume/log
 5. Start kibana and Visualize
 
 ```
-$ docker run -d --link es:elasticsearch -p 5601:5601 -name kibana kibana
+$ docker run -d --link es:elasticsearch -p 5601:5601 kibana
 ```
 Access to localhost:5601
 
@@ -135,4 +128,11 @@ PUT _template/access_app
     }
   }
 }
+```
+
+
+## Build (for developer or offline user)
+
+```
+sudo docker build -t bungoume/log-sender-demo .
 ```
