@@ -12,12 +12,12 @@ Output
 
 ## Usage
 
-1. Run Elasticsearch
+### 1. Run Elasticsearch
 ```
 $ docker run -d -p 9200:9200 --name es elasticsearch
 ```
 
-2. Create log schema (simple)
+### 2. Create log schema (simple)
 ```
 $ curl -X PUT localhost:9200/_template/access_app -d '
 {
@@ -37,17 +37,17 @@ $ curl -X PUT localhost:9200/_template/access_app -d '
 {"acknowledged":true}
 ```
 
-3. Run Sample webserver
+### 3. Run Sample webserver
 ```
 $ docker run -d -p 80:80 -v /tmp/log:/log bungoume/httpbin-container
 ```
 
-4. Start log-sender-demo
+### 4. Start log-sender-demo
 ```
 $ docker run -d --link es:elasticsearch.local -v /tmp/log:/data/log bungoume/log-sender-demo
 ```
 
-5. Start kibana and Visualize
+### 5. Start kibana and Visualize
 
 ```
 $ docker run -d --link es:elasticsearch -p 5601:5601 kibana
